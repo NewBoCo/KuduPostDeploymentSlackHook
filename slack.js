@@ -51,7 +51,7 @@ function convertToSlackMessage({ body, channel, repo })
         attachments: [
             {
                 color: success ? 'good' : 'danger',
-                author: body.author,
+                author_name: body.author,
                 title: body.id,
                 title_link: repo && `https://github.com/${repo}/commit/${body.id}`,
                 text: body.message,
