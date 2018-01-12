@@ -42,14 +42,17 @@ function sendToSlack(parsedRequest, callback)
         req.end();
 }
 
-function convertToSlackMessage({ body, channel, repo })
+function convertToSlackMessage({ body, channel, repo, scheme })
 {
     repo = repo || process.env.repo;
+    var scheme = appScheme || process.env.appScheme || 'https';
 
     var success = (body.status=='success' && body.complete);
     return {
         icon_emoji: success ? ':sun_small_cloud:' : ':rain_cloud:',
-        text:       body.hostName ? body.hostName.replace('.scm.','.') : `https://${body.siteName}.azurewebsites.net/`,
+        text: body.hostName ?
+            `${scheme}://${body.hostName.replace('.scm.','.')}` :
+            `${scheme}://${body.siteName}.azurewebsites.net/`,
         attachments: [
             {
                 color: success ? 'good' : 'danger',
