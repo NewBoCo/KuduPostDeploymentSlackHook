@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Stratafolio/KuduPostDeploymentSlackHook/issues"
   },
-  "homepage": "https://github.com/Stratafolio/KuduPostDeploymentSlackHook#readme"
+  "homepage": "https://github.com/Stratafolio/KuduPostDeploymentSlackHook#readme",
+  "dependencies": {
+    "gravatar": "^1.6.0"
+  }
 }

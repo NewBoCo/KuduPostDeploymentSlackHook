@@ -1,5 +1,6 @@
 var https                   = require('https');
 var url                     = require('url');
+var gravatar                = require('gravatar');
 var slackHookRequestOptions = getSlackHookRequestOptions();
 module.exports.sendToSlack  = sendToSlack;
 
@@ -51,6 +52,7 @@ function convertToSlackMessage({ body, channel, repo })
             {
                 color: success ? 'good' : 'danger',
                 author_name: body.author,
+                author_icon: gravatar.url(body.authorEmail, { s: '16', d: '404' }, true),
                 title: body.id,
                 title_link: repo && `https://github.com/${repo}/commit/${body.id}`,
                 text: body.message,
