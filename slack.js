@@ -45,7 +45,6 @@ function convertToSlackMessage({ body, channel, repo })
 {
     var success = (body.status=='success' && body.complete);
     return {
-        username:   getSlackUserName(body, success),
         icon_emoji: success ? ':sun_small_cloud:' : ':rain_cloud:',
         text:       `https://${body.siteName}.azurewebsites.net/`,
         attachments: [
@@ -78,13 +77,4 @@ function trParseBody(body)
             complete: false
         };
     }
-}
-
-function getSlackUserName(parsedBody, success)
-{
-    return (
-        (success ? 'Published:': 'Failed:') +
-        ' ' +
-        (parsedBody.siteName || 'unknown')
-    );
 }
