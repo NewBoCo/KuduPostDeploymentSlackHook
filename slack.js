@@ -45,7 +45,8 @@ function convertToSlackMessage(body, channel)
     var success     = (parsedBody.status=='success' && parsedBody.complete);
     return {
         username:   getSlackUserName(parsedBody, success),
-        icon_emoji: success ? ':shipit:' : ':warning:',
+        color:      success ? 'good' : 'danger',
+        icon_emoji: success ? ':sun_small_cloud:' : ':rain_cloud:',
         text:       getSlackText(parsedBody),
         channel:    channel || process.env.slackchannel
     };
