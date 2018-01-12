@@ -44,6 +44,8 @@ function sendToSlack(parsedRequest, callback)
 
 function convertToSlackMessage({ body, channel, repo })
 {
+    repo = repo || process.env.repo;
+
     var success = (body.status=='success' && body.complete);
     return {
         icon_emoji: success ? ':sun_small_cloud:' : ':rain_cloud:',
