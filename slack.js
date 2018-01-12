@@ -25,7 +25,7 @@ function sendToSlack(parsedRequest, callback)
         var error           = false;
         parsedRequest.body  = trParseBody(parsedRequest.body);
         console.log(parsedRequest.body);
-        var slackMessage    = convertToSlackMessage(parsedRequest.body, parsedRequest.channel);
+        var slackMessage    = convertToSlackMessage(parsedRequest);
         console.log(slackMessage);
 
         var req             = https.request(slackHookRequestOptions);
@@ -41,13 +41,13 @@ function sendToSlack(parsedRequest, callback)
         req.end();
 }
 
-function convertToSlackMessage(parsedBody, channel)
+function convertToSlackMessage({ body, channel })
 {
-    var success     = (parsedBody.status=='success' && parsedBody.complete);
+    var success = (body.status=='success' && body.complete);
     return {
-        username:   getSlackUserName(parsedBody, success),
+        username:   getSlackUserName(body, success),
         icon_emoji: success ? ':sun_small_cloud:' : ':rain_cloud:',
-        text:       getSlackText(parsedBody),
+        text:       getSlackText(body),
         channel:    channel || process.env.slackchannel
     };
 }
