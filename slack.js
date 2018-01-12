@@ -51,7 +51,7 @@ function convertToSlackMessage({ body, channel, repo, scheme })
     return {
         icon_emoji: success ? ':sun_small_cloud:' : ':rain_cloud:',
         text: body.hostName ?
-            `${scheme}://${body.hostName.replace('.scm.','.')}` :
+            `${scheme}://${body.hostName.replace('.scm.','.')}/` :
             `${scheme}://${body.siteName}.azurewebsites.net/`,
         attachments: [
             {
