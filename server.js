@@ -14,7 +14,6 @@ http.createServer(function (req, res) {
                 return;
             }
 
-            console.log(parsedRequest.body);
             slack.sendToSlack(parsedRequest, function(error) {
                 var result = {
                         status: 500,

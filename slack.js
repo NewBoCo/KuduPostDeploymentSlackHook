@@ -23,7 +23,11 @@ function sendToSlack(parsedRequest, callback)
         }
 
         var error           = false;
+        parsedRequest.body  = trParseBody(parsedRequest.body);
+        console.log(parsedRequest.body);
         var slackMessage    = convertToSlackMessage(parsedRequest.body, parsedRequest.channel);
+        console.log(slackMessage);
+
         var req             = https.request(slackHookRequestOptions);
 
         req.on('error', function(e) {
@@ -37,11 +41,8 @@ function sendToSlack(parsedRequest, callback)
         req.end();
 }
 
-function convertToSlackMessage(body, channel)
+function convertToSlackMessage(parsedBody, channel)
 {
-    var parsedBody  = trParseBody(body);
-    console.log(parsedBody);
-
     var success     = (parsedBody.status=='success' && parsedBody.complete);
     return {
         username:   getSlackUserName(parsedBody, success),
