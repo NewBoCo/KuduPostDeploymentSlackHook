@@ -41,13 +41,24 @@ function sendToSlack(parsedRequest, callback)
         req.end();
 }
 
-function convertToSlackMessage({ body, channel })
+function convertToSlackMessage({ body, channel, repo })
 {
     var success = (body.status=='success' && body.complete);
     return {
         username:   getSlackUserName(body, success),
         icon_emoji: success ? ':sun_small_cloud:' : ':rain_cloud:',
-        text:       getSlackText(body),
+        text:       `https://${body.siteName}.azurewebsites.net/`,
+        attachments: [
+            {
+                color: success ? 'good' : 'danger',
+                author: body.author,
+                title: body.id,
+                title_link: repo && `https://github.com/${repo}/commit/${body.id}`,
+                text: body.message,
+                footer: body.deployer,
+                ts: new Date(body.startTime)/1000|0,
+            }
+        ],
         channel:    channel || process.env.slackchannel
     };
 }
@@ -75,23 +86,5 @@ function getSlackUserName(parsedBody, success)
         (success ? 'Published:': 'Failed:') +
         ' ' +
         (parsedBody.siteName || 'unknown')
-    );
-}
-
-function getSlackText(parsedBody)
-{
-    var hostName = parsedBody.hostName
-    var id = parsedBody.id
-    return (
-        'Initiated by: ' +
-        (parsedBody.author || 'unknown') +
-        ' ' +
-        (parsedBody.endTime || '') +
-        '\r\n' +
-        (hostName ? '<https://' + hostName + '|' + hostName + '> ' : '') +
-        (id ? 'Id: ' + parsedBody.id + '\r\n' : '') +
-        '```' +
-        (parsedBody.message || 'null message') +
-        '```'
     );
 }
