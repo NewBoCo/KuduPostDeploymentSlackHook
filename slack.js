@@ -54,7 +54,7 @@ function convertToSlackMessage({ body, channel, repo })
             {
                 color: success ? 'good' : 'danger',
                 author_name: body.author,
-                author_icon: gravatar.url(body.authorEmail, { s: '16', d: '404' }, true),
+                author_icon: gravatar.url(body.authorEmail, { s: '64', d: '404' }, true),
                 title: body.id,
                 title_link: repo && `https://github.com/${repo}/commit/${body.id}`,
                 text: body.message,
