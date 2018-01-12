@@ -33,7 +33,7 @@ function parseRequest(req)
 {
     var parsedRequest = {
         body:       '',
-        channel:    url.parse(req.url, true).query.channel
+        ...url.parse(req.url, true).query
     };
 
     req.on('data', function (chunk) { parsedRequest.body += chunk; });
