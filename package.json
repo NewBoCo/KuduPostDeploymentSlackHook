@@ -1,0 +1,20 @@
+{
+  "name": "kudupostdeploymentslackhook",
+  "version": "1.0.0",
+  "description": "This is a very simple [Node.js](https://nodejs.org/) based [Azure](https://azure.com/) web app post deployment hook that notifies deployment status to [Slack](https://slack.com/) via an incoming webhook.\r ![Azure web app deployment Slack notification](https://raw.githubusercontent.com/WCOMAB/KuduPostDeploymentSlackHook/master/kudupostdeploymentslackhook.png)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Stratafolio/KuduPostDeploymentSlackHook.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Stratafolio/KuduPostDeploymentSlackHook/issues"
+  },
+  "homepage": "https://github.com/Stratafolio/KuduPostDeploymentSlackHook#readme"
+}
