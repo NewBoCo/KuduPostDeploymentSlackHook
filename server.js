@@ -13,6 +13,8 @@ http.createServer(function (req, res) {
                 res.end("WCOM AB - Kudu Post Deployment Slack Hook");
                 return;
             }
+
+            console.log(parsedRequest.body);
             slack.sendToSlack(parsedRequest, function(error) {
                 var result = {
                         status: 500,

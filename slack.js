@@ -33,20 +33,22 @@ function sendToSlack(parsedRequest, callback)
 
         req.on('close', function() { callback(error); } );
 
-        req.write(slackMessage);
+        req.write(JSON.stringify(slackMessage));
         req.end();
 }
 
 function convertToSlackMessage(body, channel)
 {
     var parsedBody  = trParseBody(body);
+    console.log(parsedBody);
+
     var success     = (parsedBody.status=='success' && parsedBody.complete);
-    return JSON.stringify({
+    return {
         username:   getSlackUserName(parsedBody, success),
         icon_emoji: success ? ':shipit:' : ':warning:',
         text:       getSlackText(parsedBody),
         channel:    channel || process.env.slackchannel
-    });
+    };
 }
 
 function trParseBody(body)
