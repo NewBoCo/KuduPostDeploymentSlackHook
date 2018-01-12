@@ -42,7 +42,7 @@ function sendToSlack(parsedRequest, callback)
         req.end();
 }
 
-function convertToSlackMessage({ body, channel, repo, scheme })
+function convertToSlackMessage({ body, channel, repo, appScheme })
 {
     repo = repo || process.env.repo;
     var scheme = appScheme || process.env.appScheme || 'https';
