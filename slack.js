@@ -49,7 +49,7 @@ function convertToSlackMessage({ body, channel, repo })
     var success = (body.status=='success' && body.complete);
     return {
         icon_emoji: success ? ':sun_small_cloud:' : ':rain_cloud:',
-        text:       `https://${body.siteName}.azurewebsites.net/`,
+        text:       body.hostName ? body.hostName.replace('.scm.','.') : `https://${body.siteName}.azurewebsites.net/`,
         attachments: [
             {
                 color: success ? 'good' : 'danger',
