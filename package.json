@@ -19,5 +19,8 @@
   "homepage": "https://github.com/Stratafolio/KuduPostDeploymentSlackHook#readme",
   "dependencies": {
     "gravatar": "^1.6.0"
+  },
+  "engines": {
+    "node": "8.9.3"
   }
 }
